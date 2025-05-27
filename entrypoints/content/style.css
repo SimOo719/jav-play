@@ -1,29 +1,28 @@
-.wxt-iina-button {
-    /* 定位和层级 */
-    position: fixed;
-    top: 100px; /* 距离顶部 150px，可以按喜好调整 */
-    right: 0px;  /* 距离右侧 20px */
-    z-index: 9999; /* 确保在页面最上层 */
-    
-    /* 外观和布局 */
-    display: flex; /* 使用 flexbox 让图标和文字居中 */
-    align-items: center;
-    gap: 5px; /* 图标和文字的间距 */
-    background-color: #3173dc; /* 一个不错的蓝色 */
-    color: white;
-    padding: 5px 10px;
-    /* border-radius: 5px; 圆角 */
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 添加阴影增加立体感 */
-    
-    /* 交互效果 */
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out, background-color 0.2s ease;
-  }
+.wxt-player-button {
+  /* 定位和层级 */
+  position: fixed;
+  /* 'top' 属性现在通过内联样式设置 */
+  right: 0px;
+  z-index: 9999;
   
-  .wxt-iina-button:hover {
-    transform: scale(1.05); /* 轻微放大 */
-  }
+  /* 外观和布局 */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #3173dc;
+  color: white;
+  padding: 5px 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  
+  /* 交互效果 */
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+}
+
+.wxt-player-button:hover {
+  transform: scale(1.05);
+}
