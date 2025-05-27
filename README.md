@@ -11,3 +11,6 @@ Play video directly in javdb.com
 
 ## Players to be supported
 1. [mpv](https://mpv.io/)
+
+## Planned Features
+1. Directly jump from the javdb page to the playback page of the corresponding film on missav.
