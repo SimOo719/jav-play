@@ -5,7 +5,7 @@ Play video directly in javdb.com
 1. Download extension zip file from github release page.
 2. Open Chrome, navigate to chrome://extensions, then drag and drop the file onto the extensions page
 
-## Supported Player
+## Supported Players
 1. [IINA](https://iina.io/)
 2. [PotPlayer](https://potplayer.daum.net/)
 
