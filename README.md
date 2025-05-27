@@ -8,3 +8,6 @@ Play video directly in javdb.com
 ## Supported Player
 1. [IINA](https://iina.io/)
 2. [PotPlayer](https://potplayer.daum.net/)
+
+## Players to be supported
+1. [mpv](https://mpv.io/)
