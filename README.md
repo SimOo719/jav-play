@@ -1,7 +1,8 @@
 # Jav Play
-Play video directly in javdb.com
+1. Call the local player to play the video in javdb.com/javlibrary.com directly.
+2. Jump from the javdb.com/javlibrary.com page to the corresponding playback page of missav
 
-![Renderings](/cover.png)
+![JavDB Cover](/cover.png)
 
 ## Usage
 1. Download extension zip file from github release page.

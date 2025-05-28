@@ -3,17 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Settings</title>
+    <title>Jav Play Settings</title>
   </head>
   <body>
     <div id="app">
-      <div class="setting-row">
-        <label for="feature-toggle">Feature Enabled</label>
-        <label class="switch">
-          <input type="checkbox" id="feature-toggle">
-          <span class="slider round"></span>
-        </label>
-      </div>
+      <header>
+        <!-- <img src="/public/JavPlayer.png" alt="Jav Play Logo" class="logo"> -->
+        <h1>Jav Play</h1>
+        <p class="description">Play video directly in javdb and javlibrary.</p>
+      </header>
+
+      <hr class="separator">
+
+      <main class="settings-container">
+        <div class="setting-row">
+          <label for="feature-toggle">Enable Feature</label>
+          <label class="switch">
+            <input type="checkbox" id="feature-toggle">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </main>
+
+      <hr class="separator">
+
+      <footer>
+        <span>See more on:</span>
+        <a href="https://github.com/aizhimou/jav-play" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+        <a href="https://v2ex.com/t/1134686" target="_blank" rel="noopener noreferrer">
+          V2EX
+        </a>
+      </footer>
     </div>
     <script type="module" src="./main.ts"></script>
   </body>

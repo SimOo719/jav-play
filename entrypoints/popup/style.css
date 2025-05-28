@@ -1,18 +1,51 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  width: 180px; /* 给 popup 一个合适的宽度 */
-  padding: 0 15px;
+  width: 280px; /* 为新布局增加了宽度 */
+  padding: 0;
+  margin: 0;
   color: #333;
 }
 
 #app {
-  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 15px;
+}
+
+header {
+  margin-bottom: 15px;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 10px;
 }
 
 h1 {
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 20px;
+  font-size: 22px;
+  margin: 0 0 8px 0;
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  max-width: 240px; /* 确保描述文本可以优雅地换行 */
+}
+
+.separator {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 0;
+}
+
+.settings-container {
+  width: 100%;
+  padding: 15px 0;
 }
 
 .setting-row {
@@ -22,7 +55,27 @@ h1 {
   font-size: 14px;
 }
 
-/* 开关的样式 */
+footer {
+  padding-top: 10px;
+  margin-top: 5px;
+}
+
+footer span {
+  font-size: 13px;
+}
+
+footer a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 0 3px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* --- 开关样式 (保持不变) --- */
 .switch {
   position: relative;
   display: inline-block;
