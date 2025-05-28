@@ -5,39 +5,33 @@ import { addOrUpdateNavigationButtons, hideNavigationButtons } from '../../compo
 const STORAGE_KEY = 'feature_enabled';
 
 export default defineContentScript({
-  matches: ['*://*.javdb.com/v/*'],
+  matches: ['*://*.javdb.com/v/*', '*://*.javlibrary.com/*'],
   async main() {
     const isEnabled = await storage.getItem(`sync:${STORAGE_KEY}`) ?? true;
-    
+
     if (!isEnabled) {
       console.log('❌ [JavDB Helper] 功能已禁用。');
       hidePlayerButtons();
       hideNavigationButtons(); // 同时隐藏导航按钮
       return;
     }
-  
+
     console.log('🚀 [JavDB Helper] 功能已启用，正在运行脚本...');
 
     const processPage = async () => {
-      if (window.location.pathname.startsWith('/v/')) {
-        const videoNumber = getVideoNumber();
-        if (videoNumber) {
-          // 只要有番号，就显示导航按钮
-          addOrUpdateNavigationButtons(videoNumber);
+      const videoNumber = getVideoNumber();
+      if (videoNumber) {
+        // 只要有番号，就显示导航按钮
+        addOrUpdateNavigationButtons(videoNumber);
 
-          // 异步获取 UUID 来显示播放器按钮
-          const missavUUID = await getMissavUUID(videoNumber);
-          if (missavUUID) {
-            addOrUpdatePlayerButtons(missavUUID);
-          } else {
-            // 如果没有 UUID，则只隐藏播放器按钮
-            hidePlayerButtons();
-          }
+        // 异步获取 UUID 来显示播放器按钮
+        const missavUUID = await getMissavUUID(videoNumber);
+        if (missavUUID) {
+          addOrUpdatePlayerButtons(missavUUID);
+        } else {
+          // 如果没有 UUID，则只隐藏播放器按钮
+          hidePlayerButtons();
         }
-      } else {
-        // 如果不在视频详情页，隐藏所有按钮
-        hidePlayerButtons();
-        hideNavigationButtons();
       }
     };
 
@@ -57,19 +51,30 @@ export default defineContentScript({
 });
 
 // 获取目标视频番号
-function getVideoNumber(): string {
+function getVideoNumber(): string | undefined {
+  const pathname = window.location.pathname;
+  // javdb
+  if (pathname.startsWith('/v/')) {
     const targetElement = document.querySelector('a.button.is-white.copy-to-clipboard');
     if (!targetElement) {
       console.log('未找到目标元素');
-      return '';
+      return;
     }
     const targetNumber = targetElement.getAttribute('data-clipboard-text');
     if (!targetNumber) {
       console.log('无目标番号');
-      return '';
+      return;
     }
     console.log('目标番号', targetNumber);
     return targetNumber;
+  }
+  // javlibrary
+  const search = new URLSearchParams(window.location.search)
+  const v = search.get('v')
+  if (v) {
+    const targetElement = document.querySelector('#video_id > table > tbody > tr > td.text');
+    return targetElement?.textContent ?? undefined
+  }
 }
 
 // 获取 missav UUID
@@ -86,10 +91,10 @@ async function getMissavUUID(videoNumber: string): Promise<string> {
       if (!response.success) {
           throw new Error(response.error);
       }
-      
+
       const parser = new DOMParser();
       const doc = parser.parseFromString(response.html, 'text/html');
-      
+
       const scripts = doc.getElementsByTagName('script');
 
       for (const script of scripts) {
