@@ -1,19 +1,18 @@
-import './style.css'
-// 导入新的组件方法
+// 从两个组件中导入方法
 import { addOrUpdatePlayerButtons, hidePlayerButtons } from '../../components/PlayerButtons';
+import { addOrUpdateNavigationButtons, hideNavigationButtons } from '../../components/NavigationButtons';
 
-// storage key, 与 popup 中保持一致
 const STORAGE_KEY = 'feature_enabled';
 
 export default defineContentScript({
   matches: ['*://*.javdb.com/v/*'],
   async main() {
-    // 检查功能是否启用
     const isEnabled = await storage.getItem(`sync:${STORAGE_KEY}`) ?? true;
     
     if (!isEnabled) {
       console.log('❌ [JavDB Helper] 功能已禁用。');
-      hidePlayerButtons(); // 使用新的方法隐藏按钮
+      hidePlayerButtons();
+      hideNavigationButtons(); // 同时隐藏导航按钮
       return;
     }
   
@@ -23,18 +22,22 @@ export default defineContentScript({
       if (window.location.pathname.startsWith('/v/')) {
         const videoNumber = getVideoNumber();
         if (videoNumber) {
+          // 只要有番号，就显示导航按钮
+          addOrUpdateNavigationButtons(videoNumber);
+
+          // 异步获取 UUID 来显示播放器按钮
           const missavUUID = await getMissavUUID(videoNumber);
           if (missavUUID) {
-            // 成功获取 UUID，创建或更新按钮
-            addOrUpdatePlayerButtons(missavUUID); // 使用新的方法更新按钮
+            addOrUpdatePlayerButtons(missavUUID);
           } else {
-            // 未获取到 UUID，隐藏按钮
+            // 如果没有 UUID，则只隐藏播放器按钮
             hidePlayerButtons();
           }
         }
       } else {
-        // 如果不在视频详情页，隐藏按钮
+        // 如果不在视频详情页，隐藏所有按钮
         hidePlayerButtons();
+        hideNavigationButtons();
       }
     };
 
@@ -53,7 +56,7 @@ export default defineContentScript({
   }
 });
 
-// 获取目标视频番号 (此函数保持不变)
+// 获取目标视频番号
 function getVideoNumber(): string {
     const targetElement = document.querySelector('a.button.is-white.copy-to-clipboard');
     if (!targetElement) {
@@ -69,7 +72,7 @@ function getVideoNumber(): string {
     return targetNumber;
 }
 
-// 获取 missav UUID (此函数保持不变)
+// 获取 missav UUID
 async function getMissavUUID(videoNumber: string): Promise<string> {
   const lowerTargetNumber = videoNumber.toLowerCase();
   const targetUrl = `https://missav.ws/dm1/en/${lowerTargetNumber}`;
