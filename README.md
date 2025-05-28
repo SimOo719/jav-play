@@ -1,7 +1,7 @@
 # Jav Play
 Play video directly in javdb.com
 
-![Renderings](/public/cover.png)
+![Renderings](/cover.png)
 
 ## Usage
 1. Download extension zip file from github release page.
