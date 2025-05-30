@@ -12,8 +12,9 @@ export default defineConfig({
     // Explicitly grant permission for the background script to access this host.
     host_permissions: [
         '*://*.javdb.com/*',
+        '*://*.javlibrary.com/*',
         '*://*.missav.ws/*',
-        '*://*.javlibrary.com/*'
+        '*://*.jable.tv/*'
     ],
   },
 });
